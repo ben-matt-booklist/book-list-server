@@ -2,14 +2,14 @@
 
 const express = require('express');
 const cors = require('cors');
-//const pg = require('pg');
+const pg = require('pg');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// const client = new pg.Client(process.env.DATABASE_URL);
-// client.connect();
-// client.on('error', err => console.log(err));
+const client = new pg.Client(process.env.DATABASE_URL || 'postgres://benjamin:postgrespassword@localhost:5432/booklist');
+client.connect();
+client.on('error', err => console.log(err));
 
 app.use(cors());
 
