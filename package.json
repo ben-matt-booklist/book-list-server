@@ -1,0 +1,31 @@
+{
+  "name": "book-list-server",
+  "version": "1.0.0",
+  "description": "**Author**: Ben Taylor & Matt Gordon   **Version**: 1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ben-matt-booklist/book-list-server.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "postgres",
+    "sql"
+  ],
+  "author": "Ben & Matt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ben-matt-booklist/book-list-server/issues"
+  },
+  "homepage": "https://github.com/ben-matt-booklist/book-list-server#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "pg": "^7.4.3"
+  }
+}
