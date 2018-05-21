@@ -7,7 +7,7 @@ const pg = require('pg');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const client = new pg.Client(process.env.DATABASE_URL || 'postgres://benjamin:postgrespassword@localhost:5432/booklist');
+const client = new pg.Client(process.env.DATABASE_URL || 'postgres://benjamin:postgrespassword@localhost:5432/books_app');
 client.connect();
 client.on('error', err => console.log(err));
 
