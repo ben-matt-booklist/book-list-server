@@ -34,6 +34,17 @@ app.get('/api/v1/books', (req, res) => {
     .catch(console.error);
 })
 
+app.get('/api/v1/books/:id', (req, res) => {
+  console.log(req.params);
+  let SQL = 'SELECT * FROM books WHERE book_id = $1'
+  let values = [
+    req.params.id
+  ]
+  client.query(SQL, values)
+    .then(result => res.send(result.rows))
+    .catch(console.error);
+})
+
 app.get('*', (req, res) => res.status(403).send('This route does not exist'));
 
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
