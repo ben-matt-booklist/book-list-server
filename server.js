@@ -28,20 +28,19 @@ app.get('/', (req, res) => {
 
 app.get('/api/v1/books', (req, res) => {
   //some code goes here to get ye books
-  let SQL = 'SELECT * FROM books';
+  let SQL = 'SELECT book_id, title, author, image_url FROM books';
   client.query(SQL)
     .then(result => res.send(result.rows))
     .catch(console.error);
 })
 
 app.get('/api/v1/books/:id', (req, res) => {
-  console.log(req.params);
   let SQL = 'SELECT * FROM books WHERE book_id = $1'
   let values = [
     req.params.id
   ]
   client.query(SQL, values)
-    .then(result => res.send(result.rows))
+    .then(result => res.send(result.rows[0]))
     .catch(console.error);
 })
 
