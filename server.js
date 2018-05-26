@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const cors = require('cors');
@@ -14,17 +14,7 @@ client.on('error', err => console.log(err));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
-
-let localUrl = 'http://localhost:8080';
-
-let deployUrl = 'https://ben-matt-booklist.github.io/book-list-client/';
-
-
 app.use(express.static('/'));
-
-app.get('/', (req, res) => {
-  req.hostname === 'localhost' ? res.redirect(localUrl) : res.redirect(deployUrl);
-});
 
 app.get('/api/v1/books', (req, res) => {
   //some code goes here to get ye books
@@ -32,30 +22,34 @@ app.get('/api/v1/books', (req, res) => {
   client.query(SQL)
     .then(result => res.send(result.rows))
     .catch(console.error);
-})
+});
 
 app.get('/api/v1/books/:id', (req, res) => {
-  let SQL = 'SELECT * FROM books WHERE book_id = $1;'
+  let SQL = 'SELECT * FROM books WHERE book_id = $1;';
   let values = [
     req.params.id
-  ]
+  ];
   client.query(SQL, values)
     .then(result => res.send(result.rows[0]))
     .catch(console.error);
-})
+});
 
 app.post('/api/v1/books', (req, res) => {
-  let SQL = 'INSERT INTO books(title, author, isbn, image_url, description) VALUES($1, $2, $3, $4, $5);'
+  let SQL = 'INSERT INTO books(title, author, isbn, image_url, description) VALUES($1, $2, $3, $4, $5);';
   let values = [
     req.body.title,
     req.body.author,
     req.body.isbn,
     req.body.image_url,
     req.body.description
-  ]
+  ];
   client.query(SQL, values)
     .catch(console.error);
-})
+});
+
+app.get('/admin/:passphrase', (req,res) => {
+  res.send(req.params.passphrase === process.env.PASSPHRASE);
+});
 
 app.get('*', (req, res) => res.status(403).send('This route does not exist'));
 
